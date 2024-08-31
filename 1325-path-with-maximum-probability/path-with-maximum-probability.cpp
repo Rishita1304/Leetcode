@@ -1,15 +1,18 @@
 class Solution {
 public:
     double maxProbability(int n, vector<vector<int>>& edges, vector<double>& suc, int start_node, int end_node) {
+        //adjacency matrix
         vector<pair<int, double>> adj[n];
         for(int i=0;i<edges.size();i++){
             adj[edges[i][0]].push_back({edges[i][1], suc[i]});
             adj[edges[i][1]].push_back({edges[i][0], suc[i]});
         }
 
+        //dist array
         vector<double> dist(n, INT_MIN);
         dist[start_node] = 1;
 
+        //max heap
         priority_queue<pair<double,int>> pq;
         pq.push({1.0, start_node});
 
