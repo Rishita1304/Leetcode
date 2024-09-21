@@ -6,11 +6,18 @@ public:
     int solve(int ind, int buy, int n, int cap, vector<int>& prices, vector<vector<vector<int>>> &dp){
         if(cap==0) return 0;
         if(ind==n) return 0;
-        if(dp[ind][buy][cap] == -1){
-            if(buy) dp[ind][buy][cap] = max( -prices[ind] + solve(ind+1, 0, n, cap, prices, dp), solve(ind+1, 1, n, cap, prices, dp));
-            else dp[ind][buy][cap] = max( prices[ind] + solve(ind+1, 1, n, cap-1, prices, dp), solve(ind+1, 0, n, cap, prices, dp));
+        if(dp[ind][buy][cap] != -1) return dp[ind][buy][cap];
+
+        if(buy){ 
+            int take = -prices[ind] + solve(ind+1, 0, n, cap, prices, dp);
+            int notTake = 0 + solve(ind+1, 1, n, cap, prices, dp);
+            return dp[ind][buy][cap] = max(take, notTake);
+        }
+        else{ 
+            int take = prices[ind] + solve(ind+1, 1, n, cap-1, prices, dp);
+            int notTake = 0 + solve(ind+1, 0, n, cap, prices, dp);
+            return dp[ind][buy][cap] = max( take, notTake);
         } 
-        return dp[ind][buy][cap];
     }
     int maxProfit(int k, vector<int>& prices) {
         int n = prices.size();
