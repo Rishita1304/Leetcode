@@ -6,7 +6,6 @@ public:
         for(int i=j;i>=0;i--){
             if(i+nums[i]>=j) j=i;
         } 
-
         return j==0;
     }
 };
