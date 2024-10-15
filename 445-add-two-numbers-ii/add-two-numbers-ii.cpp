@@ -10,10 +10,11 @@
  */
 class Solution {
 public:
-    ListNode* reverse(ListNode* head){
-        ListNode* prev=NULL;
-        ListNode* curr=head;
-        ListNode* next=NULL;
+    ListNode* reverse(ListNode* node){
+        ListNode* prev = NULL;
+        ListNode* curr = node;
+        ListNode* next = NULL;
+
         while(curr){
             next = curr->next;
             curr->next = prev;
@@ -25,24 +26,24 @@ public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         ListNode* list1 = reverse(l1);
         ListNode* list2 = reverse(l2);
-        int carry=0, sum=0;
-        ListNode* curr = new ListNode(0);
-        ListNode* temp = curr;
+        int carry = 0, sum = 0;
+        ListNode* ans = new ListNode(0);
+        ListNode* curr = ans;
+
         while(list1 || list2 || carry){
-            int sum=0;
-            if(list1) {
+            if(list1){
                 carry+=list1->val;
                 list1=list1->next;
             }
-            if(list2) {
+            if(list2){
                 carry+=list2->val;
                 list2=list2->next;
             }
-            sum += carry%10;
-            ListNode* ans = new ListNode(sum);
-            temp->next = ans;
-            carry/=10;
-            temp = temp->next;
+            sum = carry%10;
+            ListNode* temp = new ListNode(sum);
+            ans->next = temp;
+            carry = carry/10;
+            ans = ans->next;
         }
         return reverse(curr->next);
     }
