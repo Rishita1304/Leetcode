@@ -1,23 +1,25 @@
 class Solution {
 public:
     vector<int> resultsArray(vector<int>& nums, int k) {
+        int left=0, right=0;
+        int n = nums.size();
+        if(k==1) return nums;
+        bool flag = true;
         vector<int> ans;
-        int i=0, n=nums.size();
-        int cnt=1;
-        for(int j = 0;j<n;j++){
-            if(j>0 && nums[j-1]+1 == nums[j]){
-                cnt++;
-            }
-            if(j-i+1>k){
-                if(nums[i]+1 == nums[i+1]){
-                    cnt--;
+        while(right<n){
+            if(right-left+1==k){
+                flag = true;
+                int maxEle=-1;
+                for(int i=left;i<right;i++){
+                    if((nums[i+1]-nums[i])==1)maxEle=max(maxEle,nums[i+1]);
+                    else flag = false;
                 }
-                i++;
+                if(!flag) maxEle = -1;
+                ans.push_back(maxEle);
+                left++;
             }
-            if(j-i+1==k){
-                ans.push_back(cnt==k ? nums[j] : -1);
-            }
+            right++;
         }
-        return ans;
+        return ans;
     }
 };
