@@ -11,18 +11,45 @@
  */
 class Solution {
 public:
-    vector<int> answer;
 
-    void postorder(TreeNode* root){
-        if(!root) return;
+       //recursive
+//     vector<int> answer;
+
+//     void postorder(TreeNode* root){
+//         if(!root) return;
         
-        postorder(root->left);
-        postorder(root->right);
+//         postorder(root->left);
+//         postorder(root->right);
         
-        answer.push_back(root->val);
+//         answer.push_back(root->val);
+//     }
+//     vector<int> postorderTraversal(TreeNode* root) {
+//         postorder(root);
+//         return answer;
+//     }
+// };
+
+
+vector<int> postorderTraversal(TreeNode* root) {
+    vector<int> ans;
+    stack<TreeNode*> st;
+    TreeNode* prev = NULL;
+    while (root || !st.empty()) {
+      while (root) {
+        st.push(root);
+        root = root->left;
+      }
+
+      auto curr = st.top();
+      if (!curr->right || curr->right == prev) {
+        ans.push_back(curr->val);
+        st.pop();
+        prev = curr;
+      }
+      else {
+        root = curr->right;
+      }
     }
-    vector<int> postorderTraversal(TreeNode* root) {
-        postorder(root);
-        return answer;
+    return ans;
     }
 };
