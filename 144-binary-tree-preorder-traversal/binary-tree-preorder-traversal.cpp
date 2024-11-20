@@ -11,8 +11,10 @@
  */
 class Solution {
 public:
-    vector<int> answer;
 
+    //recursive
+
+    // vector<int> answer;
     // void preorder(TreeNode* root){
     //     if(!root) return;
 
@@ -21,8 +23,19 @@ public:
     //     preorder(root->right);
     // }
 
-    void iterative(TreeNode* root){
-        if(!root) return;
+//     vector<int> preorderTraversal(TreeNode* root) {
+//         preorder(root);
+//         return answer;
+//     }
+// };
+
+
+
+    //iterative
+
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> answer;
+        if(!root) return answer;
         stack<TreeNode*> st;
         TreeNode* curr = root;
         while(curr || !st.empty()){
@@ -40,13 +53,6 @@ public:
                 }
             }
         }
-    }
-    vector<int> preorderTraversal(TreeNode* root) {
-        // preorder(root);
-
-        iterative(root);
         return answer;
-
-
     }
 };
