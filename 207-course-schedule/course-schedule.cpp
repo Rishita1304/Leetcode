@@ -6,10 +6,8 @@ public:
         vector<int> ans;
         vector<vector<int>> adj(n);
         for(auto pre:p){
-            adj[pre[0]].push_back(pre[1]);
-        }
-        for(int i=0;i<n;i++){
-            for(int j:adj[i]) indegree[j]++;
+            adj[pre[1]].push_back(pre[0]);
+            indegree[pre[0]]++;
         }
         queue<int> q;
         for(int i=0;i<n;i++){
