@@ -11,7 +11,7 @@ public:
                 else if(st.top()=='('){
                     st.pop();
                 }
-                else st.push(s[i]);
+                // else st.push(s[i]);
             }
             else st.push('(');
         }
