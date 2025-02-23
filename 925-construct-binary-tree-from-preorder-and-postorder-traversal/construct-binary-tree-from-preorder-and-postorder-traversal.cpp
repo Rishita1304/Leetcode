@@ -12,17 +12,19 @@
 class Solution {
 public:
     int ind = 0;
+
     int search(vector<int>& post, int start, int end, int temp){
         for(int i=start ;i<=end ;i++) if(post[i] == temp) return i;
         return -1;
     }
+
     TreeNode* solve(vector<int>& pre, vector<int>& post, int start, int end){
-        if(start > end || ind >= pre.size()) return NULL;
+        if(start > end || ind >= pre.size()) return NULL; //out of bound
 
         TreeNode* root = new TreeNode(pre[ind++]);
-        if(ind >= pre.size() || start == end) return root;
+        if(ind >= pre.size() || start == end) return root; //completed
 
-        int p = search(post, start, end, pre[ind]);
+        int p = search(post, start, end, pre[ind]); //search the index
 
         root->left = solve(pre, post, start, p);
         root->right = solve(pre, post, p+1, end-1);
