@@ -7,18 +7,12 @@ public:
         int n = nums.size();
         int sum = 0;
         while(j<n){
-            sum += nums[j];
-            if(sum >= target){
-                while(sum >= target && i<=j){
-                    int len = j-i+1;
-                    minLen = min(minLen, len);
-                    sum -= nums[i];
-                    i++;
-                }
+            sum += nums[j++];
+            while(sum >= target){
+                minLen = min(minLen, j-i);
+                sum -= nums[i++];
             }
-            j++;
         }
-        if(minLen == INT_MAX) return 0;
-        return minLen;
+        return (minLen == INT_MAX)? 0: minLen;
     }
 };
